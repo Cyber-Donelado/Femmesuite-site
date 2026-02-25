@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Payments & Security | FemmeSuite</title><link rel="stylesheet" href="styles.css"></head><body>
+<div data-site-header></div>
+<section class="section"><div class="container">
+  <div class="page-head"><h1>Payments & Security</h1><p>How FemmeSuite handles payment processing, deposits, final service charges, refunds, and merchant payouts.</p></div>
+  <div class="stack">
+    <div class="panel notice"><p><strong>Payments Provider:</strong> FemmeSuite uses <strong>Stripe</strong> as its payment service provider (PSP). Payment processing, merchant onboarding/compliance, and payout infrastructure are securely powered by Stripe.</p></div>
+    <div class="panel">
+      <h2>Booking Payment Flow</h2>
+      <table class="table">
+        <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr><td>Booking request</td><td>Client requests an appointment and provides a payment method for deposits and eligible charges.</td></tr>
+          <tr><td>Professional accepts</td><td>FemmeSuite may collect the deposit (if required) using the saved payment method.</td></tr>
+          <tr><td>Service completion</td><td>FemmeSuite charges the remaining balance or records payment completion (including supported in-person payment flows, where enabled).</td></tr>
+          <tr><td>Payouts</td><td>FemmeSuite tracks earnings in the pro ledger and initiates payouts to professionals via Stripe payout infrastructure when eligible.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <h2>Security & Data Handling</h2>
+      <ul>
+        <li>Payment credentials are handled by Stripe and are not stored as raw card data by FemmeSuite.</li>
+        <li>Transactions are processed using secure APIs and authenticated sessions.</li>
+        <li>Merchant onboarding and identity verification are handled through Stripe-powered compliance workflows.</li>
+        <li>FemmeSuite maintains booking and payment lifecycle states for dispute support and operational tracking.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>Refunds</h2>
+      <p>Refund eligibility depends on appointment timing, cancellation policy, and booking status. Deposits may be refunded automatically in certain last-minute professional reschedule/cancellation flows or according to the service cancellation policy. See the <a style="color:var(--fs-pink)" href="refund-cancellation.html">Refund & Cancellation</a> page for more details.</p>
+    </div>
+  </div>
+</div></section>
+<div data-site-footer></div><script src="header-footer.js"></script></body></html>
