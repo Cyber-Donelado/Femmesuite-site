@@ -18,7 +18,7 @@
       <header>
         <div class="container nav">
           <a class="brand" href="index.html" aria-label="FemmeSuite home">
-            <img class="brand-logo" src="assets/fs-logo-pink-transparent.png" alt="FemmeSuite logo">
+            <img class="brand-logo" src="femmesuite-site/femmesuite-logo-assets/fs-logo-pink-transparent.png" alt="FemmeSuite logo">
             <span class="brand-name">FemmeSuite</span>
           </a>
           <nav class="nav-links">
@@ -34,7 +34,7 @@
         <div class="container footer-grid">
           <div class="footer-col">
             <a class="brand" href="index.html" aria-label="FemmeSuite home">
-              <img class="brand-logo" src="assets/fs-logo-pink-transparent.png" alt="FemmeSuite logo">
+              <img class="brand-logo" src="femmesuite-site/femmesuite-logo-assets/fs-logo-pink-transparent.png" alt="FemmeSuite logo">
               <span class="brand-name">FemmeSuite</span>
             </a>
             <p class="muted small">
