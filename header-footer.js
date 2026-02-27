@@ -3,6 +3,7 @@
     ['Home','index.html'],
     ['Professional Onboarding','professional-onboarding.html'],
     ['Payments & Security','payments-security.html'],
+    ['Pricing','pricing.html'],
     ['Contact Support','contact-support.html']
   ];
   const legal = [

@@ -45,6 +45,7 @@ header{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blu
 
 .section{padding:56px 0}
 .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pricing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .card{background:var(--fs-surface);border:1px solid var(--fs-line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
 .card h3{margin:10px 0 8px;font-size:1.15rem}
 .card p{margin:0;color:var(--fs-muted);line-height:1.55}
@@ -93,6 +94,7 @@ footer{margin-top:52px;background:#fff;border-top:1px solid var(--fs-line)}
 
 @media (max-width:900px){
   .grid-3{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .kv{grid-template-columns:1fr}
   .nav{align-items:flex-start;flex-direction:column}
