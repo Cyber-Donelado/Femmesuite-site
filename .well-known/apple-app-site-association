@@ -1,0 +1,15 @@
+{
+  "webcredentials": {
+    "apps": ["SNB9QRW4YR.com.femmsuite.app"]
+  },
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "SNB9QRW4YR.com.femmsuite.app",
+        "paths": ["/invite/*", "/stripe/*"]
+      }
+    ]
+  }
+}
+
