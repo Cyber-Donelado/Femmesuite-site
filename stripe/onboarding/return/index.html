@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Stripe Onboarding Return | FemmeSuite</title>
+  <meta name="description" content="Return to FemmeSuite after Stripe Connect Express onboarding.">
+
+  <!-- Favicons / App icons -->
+  <link rel="icon" href="/femmesuite-site/femmesuite-logo-assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/femmesuite-site/femmesuite-logo-assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/femmesuite-site/femmesuite-logo-assets/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/femmesuite-site/femmesuite-logo-assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#e83e8c">
+
+  <!-- Optional (nice-to-have) -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/femmesuite-site/femmesuite-logo-assets/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/femmesuite-site/femmesuite-logo-assets/android-chrome-512x512.png">
+
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body{background:#f8f5f8;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0}
+    #fs-fallback{display:none;max-width:460px;width:100%;text-align:center}
+  </style>
+</head><body>
+<div class="container">
+  <div id="fs-fallback" class="panel">
+    <h1>Opening FemmeSuite</h1>
+    <p class="small muted">If nothing happens, tap Open in App.</p>
+    <div class="btn-row" style="margin-top:12px">
+      <a id="fs-open-app" class="btn primary" href="#">Open FemmeSuite</a>
+    </div>
+    <div class="btn-row" style="margin-top:8px">
+      <a class="btn ghost" href="#">Download on iOS</a>
+      <a class="btn ghost" href="#">Get it on Android</a>
+    </div>
+  </div>
+</div>
+<script src="/stripe/onboarding/redirect.js"></script>
+<script>
+  // Primary production deep link
+  FSStripeOnboarding.startDeepLinkRedirect('femmesuite://stripe/onboarding/return');
+  // For Expo dev, you can pass a dev_deep_link query param, e.g.
+  // ?dev_deep_link=exp%3A%2F%2F127.0.0.1%3A8081%2F--%2Fstripe%2Fonboarding%2Freturn
+</script>
+</body></html>
+
