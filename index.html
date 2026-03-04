@@ -1,9 +1,11 @@
-<!doctype html><html lang="en"><head>
+<!doctype html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>FemmeSuite | Professional Services for Women</title>
-  <meta name="description" content="FemmeSuite is a beauty services marketplace for booking trusted professionals with secure payments and a premium client experience.">
+  <meta name="description" content="FemmeSuite is a premium beauty marketplace for booking trusted professionals with secure payments and a polished client experience.">
 
   <!-- Favicons / App icons -->
   <link rel="icon" href="femmesuite-site/femmesuite-logo-assets/favicon.ico">
@@ -12,42 +14,276 @@
   <link rel="apple-touch-icon" sizes="180x180" href="femmesuite-site/femmesuite-logo-assets/apple-touch-icon.png">
   <meta name="theme-color" content="#e83e8c">
 
-  <!-- Optional (nice-to-have) -->
+  <!-- Optional -->
   <link rel="icon" type="image/png" sizes="192x192" href="femmesuite-site/femmesuite-logo-assets/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="femmesuite-site/femmesuite-logo-assets/android-chrome-512x512.png">
 
   <link rel="stylesheet" href="styles.css">
-</head><body>
-<div data-site-header></div>
-<section class="hero">
-  <div class="container hero-inner">
-    <h1>FemmeSuite</h1>
-    <p>Premium beauty booking with a polished experience for clients and professionals. Secure payment processing, appointment management, and merchant onboarding powered by Stripe.</p>
-    <div class="btn-row">
-      <a class="btn primary" href="#">Book an Appointment</a>
-      <a class="btn ghost" href="professional-onboarding.html">Professional Onboarding</a>
+</head>
+
+<body>
+  <div data-site-header></div>
+
+  <!-- HERO -->
+  <section class="hero hero-v2">
+    <div class="container hero-grid">
+      <div class="hero-left">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Premium beauty bookings • Powered by Stripe
+        </div>
+
+        <h1>Book beauty services with a premium, polished experience.</h1>
+        <p>
+          FemmeSuite connects clients with trusted beauty professionals and gives pros a modern toolkit for bookings,
+          payments, and client communication.
+        </p>
+
+        <div class="btn-row left">
+          <a class="btn primary" id="cta-book" href="https://app.femmesuite.app/explore">Book services</a>
+          <a class="btn ghost" id="cta-list" href="https://app.femmesuite.app/join-pro">List your business</a>
+        </div>
+
+        <div class="trust-row">
+          <span class="trust-chip">Secure payments</span>
+          <span class="trust-chip">Deposit + final charge</span>
+          <span class="trust-chip">Support: support@femmesuite.app</span>
+        </div>
+      </div>
+
+      <!-- Marketplace search module -->
+      <div class="hero-right">
+        <div class="search-card">
+          <h3>Find a professional</h3>
+          <p class="muted small">Search by city and category, then choose a time that works.</p>
+
+          <form id="hero-search" class="search-form">
+            <label class="field">
+              <span>City</span>
+              <input id="search-city" type="text" value="Houston, TX" placeholder="City (e.g., Houston, TX)" />
+            </label>
+
+            <label class="field">
+              <span>Category</span>
+              <select id="search-category">
+                <option value="Skincare">Skincare</option>
+                <option value="Facials">Facials</option>
+                <option value="Brows">Brows</option>
+                <option value="Lashes">Lashes</option>
+                <option value="Nails">Nails</option>
+                <option value="Waxing">Waxing</option>
+                <option value="Makeup">Makeup</option>
+                <option value="Massage">Massage</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Date (optional)</span>
+              <input id="search-date" type="date" />
+            </label>
+
+            <button class="btn primary full" type="submit">Search</button>
+
+            <div class="chip-row">
+              <button type="button" class="mini-chip" data-cat="Facials">Facials</button>
+              <button type="button" class="mini-chip" data-cat="Brows">Brows</button>
+              <button type="button" class="mini-chip" data-cat="Lashes">Lashes</button>
+              <button type="button" class="mini-chip" data-cat="Nails">Nails</button>
+              <button type="button" class="mini-chip" data-cat="Waxing">Waxing</button>
+            </div>
+          </form>
+
+          <div class="search-note">
+            <strong>Professionals:</strong> onboarding and payouts are managed through FemmeSuite, powered by Stripe.
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
-<section class="section">
-  <div class="container grid-3">
-    <div class="card"><div class="icon-badge">★</div><h3>Premium Quality</h3><p>Vetted beauty professionals, polished scheduling, and a clean client experience designed for repeat bookings.</p></div>
-    <div class="card"><div class="icon-badge">♥</div><h3>Personalized Care</h3><p>Service details, intake forms, reminders, and appointment communication in one consistent FemmeSuite flow.</p></div>
-    <div class="card"><div class="icon-badge">✓</div><h3>Safe & Secure</h3><p>Payments are processed securely through Stripe, with platform controls for deposits, refunds, and appointment lifecycle tracking.</p></div>
-  </div>
-</section>
-<section class="band"><div class="container">
-  <div class="chips"><span class="chip">Verified professionals</span><span class="chip">Secure payments</span><span class="chip">Deposit + final charge support</span><span class="chip">Support: support@femmesuite.app</span></div>
-</div></section>
-<section class="section">
-  <div class="container stack">
-    <div class="panel">
-      <h2>About FemmeSuite</h2>
-      <p>FemmeSuite is a marketplace and practice-management experience for beauty professionals and clients. Clients can request appointments, pay deposits, complete intake forms, and manage booking updates. Professionals can accept bookings, manage schedules, and process in-person or app-based payments through a secure payments stack.</p>
-      <p class="small muted">This website includes the onboarding, payments, support, and legal pages typically requested for platform and payment reviews.</p>
+  </section>
+
+  <!-- CATEGORY GRID -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Popular categories</h2>
+        <p class="muted">Browse services and book with confidence.</p>
+      </div>
+
+      <div class="cat-grid">
+        <a class="cat" href="https://app.femmesuite.app/explore?category=Facials"><span>Facials</span><span class="cat-sub">Glow &amp; skin health</span></a>
+        <a class="cat" href="https://app.femmesuite.app/explore?category=Skincare"><span>Skincare</span><span class="cat-sub">Consults &amp; treatments</span></a>
+        <a class="cat" href="https://app.femmesuite.app/explore?category=Brows"><span>Brows</span><span class="cat-sub">Shaping &amp; tint</span></a>
+        <a class="cat" href="https://app.femmesuite.app/explore?category=Lashes"><span>Lashes</span><span class="cat-sub">Lift &amp; extensions</span></a>
+        <a class="cat" href="https://app.femmesuite.app/explore?category=Nails"><span>Nails</span><span class="cat-sub">Mani &amp; pedi</span></a>
+        <a class="cat" href="https://app.femmesuite.app/explore?category=Waxing"><span>Waxing</span><span class="cat-sub">Smooth results</span></a>
+        <a class="cat" href="https://app.femmesuite.app/explore?category=Makeup"><span>Makeup</span><span class="cat-sub">Events &amp; glam</span></a>
+        <a class="cat" href="https://app.femmesuite.app/explore?category=Massage"><span>Massage</span><span class="cat-sub">Relax &amp; reset</span></a>
+      </div>
     </div>
-  </div>
-</section>
-<div data-site-footer></div>
-<script src="header-footer.js"></script>
-</body></html>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section bandish">
+    <div class="container two-col">
+      <div class="panel">
+        <h2>For clients</h2>
+        <ul>
+          <li><strong>Discover pros</strong> by location, category, and reviews.</li>
+          <li><strong>Book instantly</strong> with clear service details and pricing.</li>
+          <li><strong>Secure payments</strong> with deposits and smooth checkout.</li>
+          <li><strong>Stay informed</strong> with reminders and appointment updates.</li>
+        </ul>
+        <div class="btn-row left">
+          <a class="btn primary" href="https://app.femmesuite.app/explore">Start booking</a>
+          <a class="btn ghost" href="contact-support.html">Get support</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>For professionals</h2>
+        <ul>
+          <li><strong>Accept bookings</strong> and control your schedule.</li>
+          <li><strong>Protect your time</strong> with deposits and rules.</li>
+          <li><strong>Get paid</strong> with a modern payments stack powered by Stripe.</li>
+          <li><strong>Look premium</strong> with a standardized, luxury client experience.</li>
+        </ul>
+        <div class="btn-row left">
+          <a class="btn primary" href="https://app.femmesuite.app/join-pro">List your business</a>
+          <a class="btn ghost" href="professional-onboarding.html">See onboarding</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRO FEATURES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Built for modern beauty businesses</h2>
+        <p class="muted">A calm, standardized system that feels premium for clients and simple for pros.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon-badge">✓</div>
+          <h3>Set up shop</h3>
+          <p>Showcase services, pricing, portfolio, and policies in a clean public profile.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge">💳</div>
+          <h3>Get paid</h3>
+          <p>Deposits and final charges with clear payment status. Merchant services powered by Stripe.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge">🛡</div>
+          <h3>Protect your time</h3>
+          <p>Cancellation rules, deposits, and time-sensitive notifications for changes and approvals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section band">
+    <div class="container">
+      <div class="section-head center">
+        <h2>Loved by clients. Trusted by professionals.</h2>
+        <p class="muted">Early rollout in Houston — building the premium standard.</p>
+      </div>
+
+      <div class="quotes">
+        <div class="quote">
+          <p>"Everything feels premium and clear — booking is simple, and the appointment details are beautiful."</p>
+          <span class="muted small">Client • Houston</span>
+        </div>
+        <div class="quote">
+          <p>"Deposits and scheduling rules help protect my time. The experience feels high-end."</p>
+          <span class="muted small">Professional • Esthetics</span>
+        </div>
+        <div class="quote">
+          <p>"Payments and notifications make the workflow feel organized, not chaotic."</p>
+          <span class="muted small">Professional • Brows &amp; Lashes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>FAQ</h2>
+        <p class="muted">Quick answers for clients and professionals.</p>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>How do payments work?</summary>
+          <p>FemmeSuite supports deposits and final charges depending on booking policy. Payments are processed securely through Stripe.</p>
+        </details>
+
+        <details>
+          <summary>How do professionals get paid?</summary>
+          <p>Professional payouts are managed through onboarding and payout infrastructure powered by Stripe. See the Professional Onboarding page for details.</p>
+        </details>
+
+        <details>
+          <summary>Do clients need to "check in"?</summary>
+          <p>Check-in is designed to be low-friction. Booking and service lifecycle are tracked clearly, with optional timestamps to support dispute resolution.</p>
+        </details>
+
+        <details>
+          <summary>How do I get support?</summary>
+          <p>Email <a href="mailto:support@femmesuite.app">support@femmesuite.app</a> or use the Contact Support page.</p>
+        </details>
+      </div>
+
+      <div class="final-cta">
+        <div>
+          <h3>Ready to try FemmeSuite?</h3>
+          <p class="muted">Book services or start onboarding as a professional.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="https://app.femmesuite.app/explore">Book services</a>
+          <a class="btn ghost" href="https://app.femmesuite.app/join-pro">List your business</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div data-site-footer></div>
+  <script src="header-footer.js"></script>
+
+  <!-- Hero search behavior -->
+  <script>
+    (function () {
+      const APP_EXPLORE = "https://app.femmesuite.app/explore";
+      const form = document.getElementById("hero-search");
+      const city = document.getElementById("search-city");
+      const category = document.getElementById("search-category");
+      const date = document.getElementById("search-date");
+
+      function go(catOverride) {
+        const params = new URLSearchParams();
+        if (city && city.value) params.set("city", city.value.trim());
+        params.set("category", (catOverride || category.value || "").trim());
+        if (date && date.value) params.set("date", date.value);
+        window.location.href = APP_EXPLORE + "?" + params.toString();
+      }
+
+      form && form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        go();
+      });
+
+      document.querySelectorAll("[data-cat]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var cat = btn.getAttribute("data-cat");
+          if (category && cat) category.value = cat;
+          go(cat);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
