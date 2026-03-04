@@ -22,11 +22,24 @@
             <img class="brand-logo" src="femmesuite-site/femmesuite-logo-assets/fs-logo-pink-transparent.png" alt="FemmeSuite logo">
             <span class="brand-name">FemmeSuite</span>
           </a>
+          <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <svg class="icon-open" viewBox="0 0 24 24" fill="none"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            <svg class="icon-close" viewBox="0 0 24 24" fill="none"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+          </button>
           <nav class="nav-links">
             ${nav.map(([t,h])=>`<a href="${h}" class="${current===h?'active':''}">${t}</a>`).join('')}
           </nav>
         </div>
       </header>`;
+  });
+
+  /* Hamburger toggle */
+  document.querySelectorAll('.nav-toggle').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      var links = btn.parentElement.querySelector('.nav-links');
+      var open = links.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
   });
 
   document.querySelectorAll('[data-site-footer]').forEach(el=>{
