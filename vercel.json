@@ -16,7 +16,7 @@
   "rewrites": [
     { "source": "/book/:path*", "destination": "/index.html" },
     { "source": "/invite",      "destination": "/index.html" },
-    { "source": "/ref/:path*",  "destination": "/index.html" },
+    { "source": "/ref/:path*",  "destination": "/ref/index.html" },
     { "source": "/auth/:path*", "destination": "/index.html" }
   ]
 }
