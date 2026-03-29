@@ -1,10 +1,10 @@
 (function(){
   const nav = [
     ['Home','index.html'],
-    ['Professional Onboarding','professional-onboarding.html'],
+    ['For Professionals','professional-onboarding.html'],
     ['Payments & Security','payments-security.html'],
     ['Pricing','pricing.html'],
-    ['Contact Support','contact-support.html']
+    ['Support','contact-support.html']
   ];
   const legal = [
     ['Privacy Policy','privacy-policy.html'],
@@ -64,9 +64,9 @@
 
           <div class="footer-col">
             <h4>Support</h4>
-            <a href="contact-support.html">Contact Support</a>
+            <a href="contact-support.html">Support</a>
             <a href="payments-security.html">Payments & Security</a>
-            <a href="professional-onboarding.html">Professional Onboarding</a>
+            <a href="professional-onboarding.html">For Professionals</a>
           </div>
 
           <div class="footer-col">
