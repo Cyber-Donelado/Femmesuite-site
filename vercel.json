@@ -5,7 +5,19 @@
       "headers": [
         { "key": "Content-Type", "value": "application/json" }
       ]
+    },
+    {
+      "source": "/.well-known/assetlinks.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" }
+      ]
     }
+  ],
+  "rewrites": [
+    { "source": "/book/:path*", "destination": "/index.html" },
+    { "source": "/invite",      "destination": "/index.html" },
+    { "source": "/ref/:path*",  "destination": "/index.html" },
+    { "source": "/auth/:path*", "destination": "/index.html" }
   ]
 }
 
