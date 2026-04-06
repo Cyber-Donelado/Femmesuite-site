@@ -25,6 +25,10 @@
   var filter = docTypes.map(function (t) { return 'document_type.eq.' + t; }).join(',');
   var url = SUPABASE_URL + '/rest/v1/legal_documents?or=(' + filter + ')&order=document_type,section_order&select=document_type,section_order,title,body,is_header,effective_date';
 
+  // Preserve the order specified in data-documents attribute
+  var typeOrder = {};
+  docTypes.forEach(function (t, i) { typeOrder[t] = i; });
+
   fetch(url, {
     headers: {
       apikey: SUPABASE_ANON_KEY,
@@ -40,6 +44,14 @@
         container.innerHTML = '<div class="panel"><p>No documents found.</p></div>';
         return;
       }
+
+      // Sort by the order specified in the data-documents attribute, then by section_order
+      rows.sort(function (a, b) {
+        var typeA = typeOrder[a.document_type] || 0;
+        var typeB = typeOrder[b.document_type] || 0;
+        if (typeA !== typeB) return typeA - typeB;
+        return a.section_order - b.section_order;
+      });
 
       var html = '';
       var currentType = '';
