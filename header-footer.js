@@ -9,6 +9,7 @@
   const legal = [
     ['Privacy Policy','privacy-policy.html'],
     ['Terms of Service','terms.html'],
+    ['SMS Terms','sms-terms.html'],
     ['Refund & Cancellation','refund-cancellation.html'],
     ['Professional Provider Terms','provider-terms.html']
   ];
