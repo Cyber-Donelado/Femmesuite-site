@@ -1,4 +1,18 @@
 (function(){
+  if (!window.va) {
+    window.va = function () {
+      (window.vaq = window.vaq || []).push(arguments);
+    };
+  }
+
+  if (!document.querySelector('script[data-fs-vercel-analytics]')) {
+    const analyticsScript = document.createElement('script');
+    analyticsScript.defer = true;
+    analyticsScript.src = '/_vercel/insights/script.js';
+    analyticsScript.setAttribute('data-fs-vercel-analytics', 'true');
+    document.head.appendChild(analyticsScript);
+  }
+
   const nav = [
     ['Home','index.html'],
     ['For Professionals','professional-onboarding.html'],
@@ -15,6 +29,68 @@
   ];
   const current = location.pathname.split('/').pop() || 'index.html';
 
+  if (!window.__fsAnalyticsClickTrackingBound) {
+    window.__fsAnalyticsClickTrackingBound = true;
+
+    document.addEventListener('click', (event) => {
+      const target = event.target && event.target.closest
+        ? event.target.closest('a,button')
+        : null;
+
+      if (!target) return;
+
+      const href = target.getAttribute('href') || '';
+      const explicitEvent = target.getAttribute('data-analytics-event') || '';
+      const text = (target.getAttribute('aria-label') || target.textContent || '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 80);
+
+      if (!href && !text) return;
+
+      const region = target.closest('header')
+        ? 'header'
+        : target.closest('footer')
+          ? 'footer'
+          : target.closest('.hero')
+            ? 'hero'
+            : target.closest('.page-head')
+              ? 'page-head'
+              : 'body';
+
+      const namedEvent = explicitEvent || (
+        href.indexOf('tap-to-pay-iphone.html') >= 0
+          ? 'tap_to_pay_click'
+          : href.indexOf('professional-onboarding.html') >= 0 || href.indexOf('/join-pro') >= 0
+            ? 'onboarding_click'
+            : href.indexOf('mailto:support@femmesuite.app') === 0 || /support/i.test(text)
+              ? 'support_click'
+              : /book/i.test(text)
+                ? 'book_click'
+                : ''
+      );
+
+      const analyticsData = {
+        page: location.pathname || '/',
+        region,
+        text: text || '(untitled)',
+        href: href || '(button)'
+      };
+
+      window.va('event', {
+        name: 'link_click',
+        data: analyticsData
+      });
+
+      if (namedEvent) {
+        window.va('event', {
+          name: namedEvent,
+          data: analyticsData
+        });
+      }
+    });
+  }
+
   document.querySelectorAll('[data-site-header]').forEach(el=>{
     el.innerHTML = `
       <header>
@@ -28,7 +104,7 @@
             <svg class="icon-close" viewBox="0 0 24 24" fill="none"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
           </button>
           <nav class="nav-links">
-            ${nav.map(([t,h])=>`<a href="${h}" class="${current===h?'active':''}">${t}</a>`).join('')}
+            ${nav.map(([t,h])=>`<a href="${h}" class="${current===h?'active':''}"${h === 'professional-onboarding.html' ? ' data-analytics-event="onboarding_click"' : h === 'contact-support.html' ? ' data-analytics-event="support_click"' : ''}>${t}</a>`).join('')}
           </nav>
         </div>
       </header>`;
@@ -55,7 +131,7 @@
             <p class="muted small">
               Professional services for women. FemmeSuite helps clients book trusted beauty professionals and helps pros manage appointments, payments, and communication.
             </p>
-            <a href="mailto:support@femmesuite.app" style="font-weight:700;color:var(--fs-pink)">support@femmesuite.app</a>
+            <a href="mailto:support@femmesuite.app" style="font-weight:700;color:var(--fs-pink)" data-analytics-event="support_click">support@femmesuite.app</a>
           </div>
 
           <div class="footer-col">
@@ -65,9 +141,10 @@
 
           <div class="footer-col">
             <h4>Support</h4>
-            <a href="contact-support.html">Support</a>
+            <a href="contact-support.html" data-analytics-event="support_click">Support</a>
             <a href="payments-security.html">Payments & Security</a>
-            <a href="professional-onboarding.html">For Professionals</a>
+            <a href="professional-onboarding.html" data-analytics-event="onboarding_click">For Professionals</a>
+            <a href="tap-to-pay-iphone.html" data-analytics-event="tap_to_pay_click">Tap to Pay on iPhone</a>
           </div>
 
           <div class="footer-col">
