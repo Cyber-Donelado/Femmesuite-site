@@ -26,6 +26,15 @@
 
   <!-- HERO -->
   <section class="hero hero-v2">
+    <div class="hero-backdrop" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      </video>
+      <div class="hero-backdrop-overlay"></div>
+      <div class="hero-orb hero-orb-a"></div>
+      <div class="hero-orb hero-orb-b"></div>
+    </div>
     <div class="container hero-grid">
       <div class="hero-left">
         <div class="pill">
@@ -47,6 +56,11 @@
           <span class="trust-chip">✓ Verified professionals</span>
           <span class="trust-chip">🔒 Secure payments</span>
           <span class="trust-chip">💳 Deposits handled</span>
+        </div>
+
+        <div class="hero-live-note">
+          <span class="hero-live-dot"></span>
+          Soft ambient motion, premium booking flow, and a more cinematic first impression.
         </div>
       </div>
 
@@ -146,15 +160,15 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-number">100%</div>
+          <div class="stat-number" data-count-to="100" data-suffix="%">100%</div>
           <div class="stat-label">Secure payments on every booking</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">24/7</div>
+          <div class="stat-number" data-count-to="24" data-suffix="/7">24/7</div>
           <div class="stat-label">Online booking available anytime, from any device</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">$0</div>
+          <div class="stat-number" data-count-to="0" data-prefix="$">$0</div>
           <div class="stat-label">No hidden fees — transparent pricing for professionals</div>
         </div>
       </div>
@@ -338,6 +352,13 @@
       const city = document.getElementById("search-city");
       const category = document.getElementById("search-category");
       const date = document.getElementById("search-date");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const heroVideo = document.querySelector(".hero-video");
+
+      if (heroVideo && prefersReducedMotion) {
+        heroVideo.pause();
+        heroVideo.removeAttribute("autoplay");
+      }
 
       function go(catOverride) {
         const params = new URLSearchParams();
@@ -359,6 +380,77 @@
           go(cat);
         });
       });
+
+      const revealTargets = Array.from(document.querySelectorAll(
+        ".hero-left > *, .search-card, .marquee-band, .section-head, .cat, .stat-item, .panel, .card, .quote, .faq details, .final-cta"
+      ));
+
+      revealTargets.forEach(function (el, index) {
+        el.classList.add("reveal");
+        el.style.transitionDelay = Math.min(index * 35, 280) + "ms";
+      });
+
+      if (!prefersReducedMotion && "IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.14, rootMargin: "0px 0px -48px 0px" });
+
+        revealTargets.forEach(function (el) {
+          revealObserver.observe(el);
+        });
+
+        const statObserver = new IntersectionObserver(function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+
+            const el = entry.target;
+            const target = Number(el.getAttribute("data-count-to") || "0");
+            const prefix = el.getAttribute("data-prefix") || "";
+            const suffix = el.getAttribute("data-suffix") || "";
+            const duration = 1200;
+            const start = performance.now();
+
+            function tick(now) {
+              const progress = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = Math.round(target * eased);
+              el.textContent = prefix + current + suffix;
+              if (progress < 1) {
+                requestAnimationFrame(tick);
+              }
+            }
+
+            requestAnimationFrame(tick);
+            observer.unobserve(el);
+          });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll(".stat-number[data-count-to]").forEach(function (el) {
+          statObserver.observe(el);
+        });
+
+        const hero = document.querySelector(".hero-v2");
+        const backdrop = document.querySelector(".hero-backdrop");
+
+        if (hero && backdrop) {
+          const updateParallax = function () {
+            const rect = hero.getBoundingClientRect();
+            const offset = Math.max(-24, Math.min(32, rect.top * -0.08));
+            backdrop.style.transform = "translate3d(0," + offset + "px,0)";
+          };
+
+          updateParallax();
+          window.addEventListener("scroll", updateParallax, { passive: true });
+        }
+      } else {
+        revealTargets.forEach(function (el) {
+          el.classList.add("is-visible");
+        });
+      }
     })();
   </script>
 </body>
