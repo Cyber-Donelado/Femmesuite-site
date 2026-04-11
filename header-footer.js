@@ -141,6 +141,44 @@
     });
   }
 
+  if (!window.__fsInternalRevealBound) {
+    window.__fsInternalRevealBound = true;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isHomePage = !!document.querySelector('.hero-v2');
+
+    if (!isHomePage) {
+      const revealTargets = Array.from(document.querySelectorAll(
+        '.page-head, .page-head-actions, .pricing-grid > *, .stack > *, .table-wrap, #legal-content > .panel'
+      )).filter((element, index, array) => array.indexOf(element) === index);
+
+      revealTargets.forEach((element, index) => {
+        if (!element.classList.contains('reveal')) {
+          element.classList.add('reveal');
+          element.style.transitionDelay = Math.min(index * 40, 240) + 'ms';
+        }
+      });
+
+      if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, instance) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            instance.unobserve(entry.target);
+          });
+        }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+
+        revealTargets.forEach((element) => {
+          observer.observe(element);
+        });
+      } else {
+        revealTargets.forEach((element) => {
+          element.classList.add('is-visible');
+        });
+      }
+    }
+  }
+
   document.querySelectorAll('[data-site-header]').forEach(el=>{
     el.innerHTML = `
       <header>

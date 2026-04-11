@@ -19,7 +19,7 @@
   if (!docTypes.length) return;
 
   // Show loading state
-  container.innerHTML = '<div class="panel" style="text-align:center;padding:40px"><p style="color:#888">Loading…</p></div>';
+  container.innerHTML = '<div class="panel legal-loading"><p>Loading…</p></div>';
 
   // Build query — fetch all matching document types ordered correctly
   var filter = docTypes.map(function (t) { return 'document_type.eq.' + t; }).join(',');
@@ -41,7 +41,7 @@
     })
     .then(function (rows) {
       if (!rows.length) {
-        container.innerHTML = '<div class="panel"><p>No documents found.</p></div>';
+        container.innerHTML = '<div class="panel legal-empty"><p>No documents found.</p></div>';
         return;
       }
 
@@ -61,19 +61,23 @@
         if (row.document_type !== currentType) {
           if (currentType) html += '</div>'; // close previous panel
           currentType = row.document_type;
-          html += '<div class="panel">';
+          html += '<div class="panel legal-document">';
         }
 
         if (row.is_header) {
-          html += '<h2 style="margin-bottom:12px;font-size:1.4rem">' + esc(row.title) + '</h2>';
+          html += '<div class="legal-document-header">';
+          html += '<h2 class="legal-document-title">' + esc(row.title) + '</h2>';
+          if (row.effective_date) {
+            html += '<p class="legal-document-meta">Effective ' + esc(row.effective_date) + '</p>';
+          }
           row.body.forEach(function (p) {
-            html += '<p style="color:#888;margin-bottom:8px">' + esc(p) + '</p>';
+            html += '<p class="legal-document-intro">' + esc(p) + '</p>';
           });
-          html += '<hr style="border:none;border-top:1px solid #262626;margin:20px 0">';
+          html += '</div><div class="legal-divider"></div>';
         } else {
-          html += '<h3 style="margin-top:24px;margin-bottom:8px">' + esc(row.title) + '</h3>';
+          html += '<h3 class="legal-section-title">' + esc(row.title) + '</h3>';
           row.body.forEach(function (p) {
-            html += '<p style="margin-bottom:8px;line-height:1.7;color:#ccc">' + esc(p) + '</p>';
+            html += '<p class="legal-section-text">' + esc(p) + '</p>';
           });
         }
       });
@@ -86,7 +90,7 @@
     .catch(function (err) {
       console.error('Legal loader error:', err);
       container.innerHTML =
-        '<div class="panel"><p style="color:#f87171">Unable to load legal documents. Please try again later.</p></div>';
+        '<div class="panel legal-error"><p>Unable to load legal documents. Please try again later.</p></div>';
     });
 
   function esc(str) {
