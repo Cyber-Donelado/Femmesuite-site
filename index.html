@@ -165,10 +165,22 @@
 
       <div class="cat-grid">
         <a class="cat" href="https://app.femmesuite.app/explore?category=Facials"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg></span><span class="cat-name">Facials</span><span class="cat-sub">Glow &amp; skin health</span></a>
-        <a class="cat" href="https://app.femmesuite.app/explore?category=Skincare"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-bottle"></use></svg></span><span class="cat-name">Skincare</span><span class="cat-sub">Consults &amp; treatments</span></a>
+        <a class="cat has-video" href="https://app.femmesuite.app/explore?category=Skincare" data-hover-video-card>
+          <video class="cat-video" muted loop playsinline preload="metadata" aria-hidden="true">
+            <source src="media/skincare.mp4" type="video/mp4">
+          </video>
+          <span class="cat-video-overlay" aria-hidden="true"></span>
+          <span class="cat-body"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-bottle"></use></svg></span><span class="cat-name">Skincare</span><span class="cat-sub">Consults &amp; treatments</span></span>
+        </a>
         <a class="cat" href="https://app.femmesuite.app/explore?category=Brows"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-brow"></use></svg></span><span class="cat-name">Brows</span><span class="cat-sub">Shaping &amp; tint</span></a>
         <a class="cat" href="https://app.femmesuite.app/explore?category=Lashes"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg></span><span class="cat-name">Lashes</span><span class="cat-sub">Lift &amp; extensions</span></a>
-        <a class="cat" href="https://app.femmesuite.app/explore?category=Nails"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-hand"></use></svg></span><span class="cat-name">Nails</span><span class="cat-sub">Mani &amp; pedi</span></a>
+        <a class="cat has-video" href="https://app.femmesuite.app/explore?category=Nails" data-hover-video-card>
+          <video class="cat-video" muted loop playsinline preload="metadata" aria-hidden="true">
+            <source src="media/nails.mp4" type="video/mp4">
+          </video>
+          <span class="cat-video-overlay" aria-hidden="true"></span>
+          <span class="cat-body"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-hand"></use></svg></span><span class="cat-name">Nails</span><span class="cat-sub">Mani &amp; pedi</span></span>
+        </a>
         <a class="cat" href="https://app.femmesuite.app/explore?category=Waxing"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-leaf"></use></svg></span><span class="cat-name">Waxing</span><span class="cat-sub">Smooth results</span></a>
         <a class="cat" href="https://app.femmesuite.app/explore?category=Makeup"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-lipstick"></use></svg></span><span class="cat-name">Makeup</span><span class="cat-sub">Events &amp; glam</span></a>
         <a class="cat" href="https://app.femmesuite.app/explore?category=Massage"><span class="cat-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-lotus"></use></svg></span><span class="cat-name">Massage</span><span class="cat-sub">Relax &amp; reset</span></a>
@@ -384,6 +396,37 @@
         heroVideo.pause();
         heroVideo.removeAttribute("autoplay");
       }
+
+      document.querySelectorAll("[data-hover-video-card]").forEach(function (card) {
+        var video = card.querySelector(".cat-video");
+        if (!video) return;
+
+        var playVideo = function () {
+          if (prefersReducedMotion) return;
+          card.classList.add("is-playing");
+          var playPromise = video.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(function () {});
+          }
+        };
+
+        var pauseVideo = function () {
+          card.classList.remove("is-playing");
+          video.pause();
+          try {
+            video.currentTime = 0;
+          } catch (error) {}
+        };
+
+        card.addEventListener("mouseenter", playVideo);
+        card.addEventListener("mouseleave", pauseVideo);
+        card.addEventListener("focusin", playVideo);
+        card.addEventListener("focusout", pauseVideo);
+
+        if (prefersReducedMotion) {
+          pauseVideo();
+        }
+      });
 
       function go(catOverride) {
         const params = new URLSearchParams();
